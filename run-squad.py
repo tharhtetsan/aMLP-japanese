@@ -12,7 +12,6 @@ from tensorflow.keras.optimizers import Adam
 
 from modeling import model as build_model
 from modeling import projection
-
 from encoder import get_encoder
 
 CHECKPOINT_DIR = 'checkpoint'
