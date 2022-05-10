@@ -38,6 +38,12 @@
           "question":"F-22の生産数が削減された理由は？",
           "answers":[{"text":"","answer_start":0}],
           "is_impossible":false
+        },
+        {
+          "question_id":6,
+          "question":"",
+          "answers":[{"text":"","answer_start":0}],
+          "is_impossible":false
         }
       ]
     }]
