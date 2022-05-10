@@ -1,4 +1,5 @@
 import argparse
+from ast import arg
 import json
 import os
 import numpy as np
@@ -40,7 +41,7 @@ parser.add_argument('--restore_from', type=str, default='', help='checkpoint nam
 parser.add_argument("--verbose", action='store_true' )
 
 def read_squad_json(filename, to_val=False):
-    with open(filename,,encoding="utf-8") as f:
+    with open(filename,encoding="utf-8") as f:
         squad = json.loads(f.read())
     context, question, answer_start, answer_end, question_id, answer = [], [], [], [], [], []
     num_quest = 0
@@ -130,7 +131,7 @@ def main():
     log_dir = args.log_dir
     max_answer_length = args.max_answer_length
 
-    with open(bpe_path,,encoding="utf-8") as f:
+    with open(bpe_path,encoding="utf-8") as f:
         ww = np.sum([1 if ('##' in l) else 0 for l in f.readlines()]) > 0
     enc = get_encoder(bpe_path, 'emoji.json', ww)
 
@@ -187,6 +188,7 @@ def main():
             lossmodel = tf.keras.models.load_model(args.restore_from, \
                     custom_objects={'crossentropy': crossentropy})
         else:
+            print("base_model : ",args.base_model)
             model = tf.keras.models.load_model(args.base_model, \
                     custom_objects={'loss': tf.keras.losses.Loss()})
             lossmodel = squad_model(model, conf_dict)
